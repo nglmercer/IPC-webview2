@@ -4,15 +4,11 @@
 
 export type AsyncCallback = (...args: any[]) => Promise<any>;
 
-export interface IPCMessage {
-  id: string;
-  type: 'call' | 'callback' | 'response' | 'error';
-  method?: string;
-  args?: any[];
-  callbackId?: string;
-  result?: any;
-  error?: string;
-}
+export type IPCMessage =
+  | { id: string; type: 'call'; method: string; args?: any[] }
+  | { id: string; type: 'response'; result?: any }
+  | { id: string; type: 'error'; error?: string }
+  | { id: string; type: 'callback'; callbackId: string; args?: any[] };
 
 export interface IPCHandler {
   handler: AsyncCallback;

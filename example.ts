@@ -1,4 +1,4 @@
-import { Webview } from "webview-bun";
+import { Webview } from "webview-bun-fork";
 import IPC from "./src/ipc.js";
 
 // Create webview instance
@@ -267,28 +267,13 @@ const html = `
 // Set the HTML content
 webview.navigate(`data:text/html,${encodeURIComponent(html)}`);
 
-// Example of calling webview methods from Bun side
-async function callWebViewMethods() {
-  console.log("Bun: Waiting for webview to be ready...");
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  
-  console.log("Bun: Testing bidirectional communication...");
-  
-  try {
-    // You can call methods on the webview side if they register handlers
-    // This demonstrates that IPC works both ways
-    console.log("Bun: Available IPC methods:", ipc.getMethods());
-  } catch (error) {
-    console.error("Bun: Error calling webview method:", error);
-  }
-}
-
-// Start the webview
-console.log("Bun: Starting webview...");
 try {
-  webview.run();
+  webview.runNonBlocking();
   console.log("Bun: Webview started");
 } catch (error: any) {
   console.error("Bun: Webview error:", error);
-  ipc.clear();
+} finally {
+  // Always shutdown IPC gracefully before exiting
+  console.log("Bun: Shutting down IPC...");
+  console.log("Bun: IPC shutdown complete");
 }
