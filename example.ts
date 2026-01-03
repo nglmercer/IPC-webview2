@@ -2,7 +2,7 @@ import { Webview } from "webview-bun-fork";
 import IPC from "./src/ipc.js";
 import indexHtml from "./index.html" assert { type: "text" };
 // Create webview instance
-const webview = new Webview();
+const webview = new Webview(true);
 webview.title = "IPC Example";
 webview.size = { width: 800, height: 600, hint: 1 };
 // Initialize IPC
