@@ -10,7 +10,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "webview-bun": "^2.4.0",
     "webview-bun-fork": "^2.4.0"
   }
 }

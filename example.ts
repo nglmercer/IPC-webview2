@@ -5,6 +5,10 @@ import indexHtml from "./index.html" assert { type: "text" };
 const webview = new Webview(true);
 webview.title = "IPC Example";
 webview.size = { width: 800, height: 600, hint: 1 };
+/* webview.frame = false;
+webview.transparency = true;
+webview.alwaysOnTop = true;
+webview.clickThrough = true; */
 // Initialize IPC
 const ipc = new IPC(webview);
 
